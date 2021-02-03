@@ -30,6 +30,13 @@ public class Runner {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
+		System.out.println("Welcome traveler, I am Draco.");
+		printWithDelays("...", 500);
+
+		System.out.println();
+
+		System.out.println("\nMy services entail the encryption and decryption of messages.");
+
 		start();
 	}
 
@@ -40,12 +47,6 @@ public class Runner {
 	 * @throws InterruptedException
 	 */
 	public static void start() throws InterruptedException {
-		System.out.println("Welcome traveler, I am Draco.");
-		printWithDelays("...", 500);
-
-		System.out.println();
-
-		System.out.println("\nMy services entail the encryption and decryption of messages.");
 		System.out.println("Now, which method would suit your purposes?");
 		System.out.println("\n1. Encryption");
 		System.out.println("2. Decryption");
@@ -63,8 +64,9 @@ public class Runner {
 
 	/**
 	 * Runs encryption based on user's choice of algorithm/cipher.
+	 * @throws InterruptedException
 	 */
-	public static void runEncryption() {
+	public static void runEncryption() throws InterruptedException {
 		Cipher newCipher = null;
 
 		System.out.println("\nCertainly! Now you must make your choice of cipher.");
@@ -111,12 +113,31 @@ public class Runner {
 		}
 
 		System.out.println("\nYour encrypted message is: " + newCipher.getCipherText());
+
+		System.out.println("\nWould you like me to perform any other services?");
+		System.out.println("\n1. Yes (Encrypt/Decrypt)");
+		System.out.println("2. No (Exit)");
+
+		answer = console.nextInt();
+
+		switch(answer) {
+			case 1:
+				printWithDelays("...", 500);
+				start();
+
+				break;
+			case 2:
+				System.out.println("Farewell for now, traveller.");
+
+				break;
+		}
 	}
 
 	/**
 	 * Runs decryption based on user's choice of algorithm/cipher.
+	 * @throws InterruptedException
 	 */
-	public static void runDecryption() {
+	public static void runDecryption() throws InterruptedException {
 		Cipher newCipher = null;
 
 		System.out.println("\nCertainly! Now you must make your choice of cipher.");
@@ -133,36 +154,54 @@ public class Runner {
 		String key;
 
 		switch(answer) {
-		case 1:
-			System.out.println("\nYes of course. What was the key?");
+			case 1:
+				System.out.println("\nYes of course. What was the key?");
 
-			key = console.nextLine();
+				key = console.nextLine();
 
-			newCipher = new CaesarCipher(message, key);
-			newCipher.decrypt();
+				newCipher = new CaesarCipher(message, key);
+				newCipher.decrypt();
 
-			break;
-		case 2:
-			System.out.println("\nYes of course. What was the key?");
+				break;
+			case 2:
+				System.out.println("\nYes of course. What was the key?");
 
-			key = console.nextLine();
+				key = console.nextLine();
 
-			newCipher = new BealeCipher(message, key);
-			newCipher.decrypt();
+				newCipher = new BealeCipher(message, key);
+				newCipher.decrypt();
 
-			break;
-		case 3:
-			System.out.println("\nYes of course. What was the key?");
+				break;
+			case 3:
+				System.out.println("\nYes of course. What was the key?");
 
-			key = console.nextLine();
+				key = console.nextLine();
 
-			newCipher = new OneTimePad(message, key);
-			newCipher.decrypt();
+				newCipher = new OneTimePad(message, key);
+				newCipher.decrypt();
 
-			break;
+				break;
 		}
 
 		System.out.println("\nYour decrypted message is: " + newCipher.getPlainText());
+
+		System.out.println("\nWould you like me to perform any other services?");
+		System.out.println("\n1. Yes (Encrypt/Decrypt)");
+		System.out.println("2. No (Exit)");
+
+		answer = console.nextInt();
+
+		switch(answer) {
+			case 1:
+				printWithDelays("...", 500);
+				start();
+
+				break;
+			case 2:
+				System.out.println("Farewell for now, traveller.");
+
+				break;
+		}
 	}
 
 	public static void printWithDelays(String data, long delay)

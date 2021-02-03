@@ -18,27 +18,27 @@ public class CaesarCipher implements Cipher {
 	@Override
 	public void encrypt() {
 		for (int i = 0; i < message.length(); i++) {
-			char value = ' ';
+			char newValue;
+			char currentValue = message.charAt(i);
 
-			if (message.charAt(i) == ' ') {
-				cipherText += value;
+			if (!Character.isLetter(currentValue)) {
+				cipherText += currentValue;
 			}
 
 			else {
-				char ch = message.charAt(i);
-				boolean isUpperCase = Character.isUpperCase(ch);
+				boolean isUpperCase = Character.isUpperCase(currentValue);
 
-				int map = alphabet.indexOf(Character.toLowerCase(ch));
+				int map = alphabet.indexOf(Character.toLowerCase(currentValue));
 				int shiftValue = (Integer.parseInt(key) + map) % 26;
 
 				if (isUpperCase) {
-					value = Character.toUpperCase(alphabet.charAt(shiftValue));
+					newValue = Character.toUpperCase(alphabet.charAt(shiftValue));
 				}
 				else {
-					value = alphabet.charAt(shiftValue);
+					newValue = alphabet.charAt(shiftValue);
 				}
 
-				cipherText += value;
+				cipherText += newValue;
 			}
 		}
 	}
@@ -46,17 +46,17 @@ public class CaesarCipher implements Cipher {
 	@Override
 	public void decrypt() {
 		for (int i = 0; i < message.length(); i++) {
-			char value = ' ';
+			char newValue;
+			char currentValue = message.charAt(i);
 
-			if (message.charAt(i) == ' ') {
-				plainText += value;
+			if (!Character.isLetter(currentValue)) {
+				plainText += currentValue;
 			}
 
 			else {
-				char ch = message.charAt(i);
-				boolean isUpperCase = Character.isUpperCase(ch);
+				boolean isUpperCase = Character.isUpperCase(currentValue);
 
-				int map = alphabet.indexOf(Character.toLowerCase(ch));
+				int map = alphabet.indexOf(Character.toLowerCase(currentValue));
 				int shiftValue = (map - Integer.parseInt(key)) % 26;
 
 				if (shiftValue < 0) {
@@ -64,13 +64,13 @@ public class CaesarCipher implements Cipher {
 				}
 
 				if (isUpperCase) {
-					value = Character.toUpperCase(alphabet.charAt(shiftValue));
+					newValue = Character.toUpperCase(alphabet.charAt(shiftValue));
 				}
 				else {
-					value = alphabet.charAt(shiftValue);
+					newValue = alphabet.charAt(shiftValue);
 				}
 
-				plainText += value;
+				plainText += newValue;
 			}
 		}
 	}
