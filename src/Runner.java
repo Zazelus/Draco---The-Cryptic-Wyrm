@@ -21,6 +21,8 @@ public class Runner {
 	// Answers will be given as integer values and used in conditional statements.
 	public static int answer;
 
+	public static String message;
+
 	/**
 	 * Calls the start method.
 	 *
@@ -71,17 +73,18 @@ public class Runner {
 		System.out.println("3. One-Time Pad");
 
 		answer = console.nextInt();
+		console.nextLine();
 
 		System.out.println("\nAnd now for your message, what will it be?");
 
-		String message = console.next();
+		message = console.nextLine();
 		String key;
 
 		switch(answer) {
 			case 1:
 				System.out.println("\nYes of course. What is the key? Choose a number between 0 and 25.");
 
-				key = console.next();
+				key = console.nextLine();
 
 				newCipher = new CaesarCipher(message, key);
 				newCipher.encrypt();
@@ -90,7 +93,7 @@ public class Runner {
 			case 2:
 				System.out.println("\nYes of course. What is the key? Do choose wisely.");
 
-				key = console.next();
+				key = console.nextLine();
 
 				newCipher = new BealeCipher(message, key);
 				newCipher.encrypt();
@@ -99,7 +102,7 @@ public class Runner {
 			case 3:
 				System.out.println("\nYes of course. What is the key? Do choose wisely.");
 
-				key = console.next();
+				key = console.nextLine();
 
 				newCipher = new OneTimePad(message, key);
 				newCipher.encrypt();
@@ -122,17 +125,18 @@ public class Runner {
 		System.out.println("3. One-Time Pad");
 
 		answer = console.nextInt();
+		console.nextLine();
 
 		System.out.println("\nAnd now for your message, recall what it was.");
 
-		String message = console.next();
+		message = console.nextLine();
 		String key;
 
 		switch(answer) {
 		case 1:
 			System.out.println("\nYes of course. What was the key?");
 
-			key = console.next();
+			key = console.nextLine();
 
 			newCipher = new CaesarCipher(message, key);
 			newCipher.decrypt();
@@ -141,7 +145,7 @@ public class Runner {
 		case 2:
 			System.out.println("\nYes of course. What was the key?");
 
-			key = console.next();
+			key = console.nextLine();
 
 			newCipher = new BealeCipher(message, key);
 			newCipher.decrypt();
@@ -150,7 +154,7 @@ public class Runner {
 		case 3:
 			System.out.println("\nYes of course. What was the key?");
 
-			key = console.next();
+			key = console.nextLine();
 
 			newCipher = new OneTimePad(message, key);
 			newCipher.decrypt();

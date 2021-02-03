@@ -17,33 +17,61 @@ public class CaesarCipher implements Cipher {
 
 	@Override
 	public void encrypt() {
-		String lowerMessage = message.toLowerCase();
+		for (int i = 0; i < message.length(); i++) {
+			char value = ' ';
 
-		for (int i = 0; i < lowerMessage.length(); i++) {
-			int map = alphabet.indexOf(lowerMessage.charAt(i));
-			int shiftValue = (Integer.parseInt(key) + map) % 26;
+			if (message.charAt(i) == ' ') {
+				cipherText += value;
+			}
 
-			char value = alphabet.charAt(shiftValue);
+			else {
+				char ch = message.charAt(i);
+				boolean isUpperCase = Character.isUpperCase(ch);
 
-			cipherText += value;
+				int map = alphabet.indexOf(Character.toLowerCase(ch));
+				int shiftValue = (Integer.parseInt(key) + map) % 26;
+
+				if (isUpperCase) {
+					value = Character.toUpperCase(alphabet.charAt(shiftValue));
+				}
+				else {
+					value = alphabet.charAt(shiftValue);
+				}
+
+				cipherText += value;
+			}
 		}
 	}
 
 	@Override
 	public void decrypt() {
-		String lowerCipherText = message.toLowerCase();
+		for (int i = 0; i < message.length(); i++) {
+			char value = ' ';
 
-		for (int i = 0; i < lowerCipherText.length(); i++) {
-			int map = alphabet.indexOf(lowerCipherText.charAt(i));
-			int shiftValue = (map - Integer.parseInt(key)) % 26;
-
-			if (shiftValue < 0) {
-				shiftValue = alphabet.length() + shiftValue;
+			if (message.charAt(i) == ' ') {
+				plainText += value;
 			}
 
-			char value = alphabet.charAt(shiftValue);
+			else {
+				char ch = message.charAt(i);
+				boolean isUpperCase = Character.isUpperCase(ch);
 
-			plainText += value;
+				int map = alphabet.indexOf(Character.toLowerCase(ch));
+				int shiftValue = (map - Integer.parseInt(key)) % 26;
+
+				if (shiftValue < 0) {
+					shiftValue = alphabet.length() + shiftValue;
+				}
+
+				if (isUpperCase) {
+					value = Character.toUpperCase(alphabet.charAt(shiftValue));
+				}
+				else {
+					value = alphabet.charAt(shiftValue);
+				}
+
+				plainText += value;
+			}
 		}
 	}
 
